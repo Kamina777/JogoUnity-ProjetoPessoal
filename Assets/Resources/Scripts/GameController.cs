@@ -12,22 +12,25 @@ public class GameController : MonoBehaviour
     [SerializeField] Slider hpJogador;
     [SerializeField] Slider hpInimigo;
     [SerializeField] Mapa mapa;
+    [SerializeField] GameObject mapaObject;
 
     public void Start()
     {
         mapa = GameObject.FindGameObjectWithTag("Mapa").GetComponent<Mapa>();
+        mapaObject = GameObject.FindGameObjectWithTag("Mapa");
+
     }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            mapa.PlayerSpawn();
-            mapa.EnemySpawn();
             IniciaABatalha();
         }
     }
     public void IniciaABatalha()
     {
+        mapa.PlayerSpawn();
+        mapa.EnemySpawn();
         canvasDaLuta.gameObject.SetActive(true);
         jogador = GameObject.FindGameObjectWithTag("Player");
         inimigo = GameObject.FindGameObjectWithTag("Enemy");

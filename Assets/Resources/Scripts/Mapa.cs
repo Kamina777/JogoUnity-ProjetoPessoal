@@ -14,12 +14,13 @@ public class Mapa : MonoBehaviour
     [SerializeField] private Transform enemySpawn;
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private int escolhaDoPlayer = 0;
+    [SerializeField] private GameObject Jogador;
 
     void Start()
     {
         armasPrefab = new List<GameObject>(Resources.LoadAll<GameObject>("Prefabs/Armas"));
         playerPrefab = new List<GameObject>(Resources.LoadAll<GameObject>("Prefabs/Lutadores"));
-        playerParent = GameObject.FindGameObjectWithTag("Player");
+        //playerParent = GameObject.FindGameObjectWithTag("Player");
         enemyPrefab = new List<GameObject>(Resources.LoadAll<GameObject>("Prefabs/Inimigos"));
     }
 
@@ -27,13 +28,17 @@ public class Mapa : MonoBehaviour
     {
         if (armasPrefab != null)
         {
-            int randomPrefab = Random.Range(0, armasPrefab.Count - 1); // fazer um if pra não ter arma repetida
-            Instantiate(armasPrefab[randomPrefab], playerParent.transform.GetChild(0).GetComponent<Transform>()); //spawnando no lugar errado
+            int randomPrefab = Random.Range(0, armasPrefab.Count - 1); // fazer um if pra nï¿½o ter arma repetida
+            Instantiate(armasPrefab[randomPrefab], playerParent.transform.GetChild(0).GetComponent<Transform>());
             armasPrefab.Remove(armasPrefab[randomPrefab]);
         }
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            playerParent = GameObject.FindGameObjectWithTag("Player");
+        }
         if (Input.GetKeyDown(KeyCode.A))
         {
             instantiatedDaArma();
@@ -44,12 +49,14 @@ public class Mapa : MonoBehaviour
     {
         if(enemyPrefab != null)
         {
-            int randomPrefab = Random.Range(0, enemyPrefab.Count - 1); // fazer um if pra não ter arma repetida
+            int randomPrefab = Random.Range(0, enemyPrefab.Count - 1); // fazer um if pra nï¿½o ter arma repetida
             Instantiate(enemyPrefab[randomPrefab], enemySpawn); //PEGAR O TRANSFORM POSITION DO SPAWN
         }
     }
     public void PlayerSpawn()
     {
         Instantiate(playerPrefab[escolhaDoPlayer], playerSpawn);
+        playerParent = GameObject.FindGameObjectWithTag("Player");
+
     }
 }
