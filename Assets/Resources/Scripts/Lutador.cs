@@ -17,6 +17,7 @@ public class Lutador : MonoBehaviour
     [SerializeField] private int inteligencia;
     [SerializeField] private int dano;
     [SerializeField] private EscolhaDaArma escolhaDaArma;
+    [SerializeField] private Transform alvo;
 
     void Start()
     {
@@ -53,5 +54,12 @@ public class Lutador : MonoBehaviour
         this.level += 1;
         StatsAtuais();
         CalculaDano();
+    }
+    public void setAlvo(Transform alvo){
+        this.alvo = alvo;
+    }
+
+    public Transform retornaReferencia(){
+        return this.transform;
     }
 }

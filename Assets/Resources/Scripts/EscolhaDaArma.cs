@@ -18,7 +18,7 @@ public class EscolhaDaArma : MonoBehaviour
     public void ListandoArmasChild()
     {
         quantidadeArmas = transform.childCount;
-        for (int i = 0; i < quantidadeArmas; i++) // nunca quero que o soco entra na lista, por isso começa i = 1
+        for (int i = 0; i < quantidadeArmas; i++) // nunca quero que o soco entra na lista, por isso comeï¿½a i = 1
         {
             tiposDeArma.Add(transform.GetChild(i).gameObject);
         }
@@ -62,7 +62,7 @@ public class EscolhaDaArma : MonoBehaviour
     }
     private void EscolhendoArma()
     {
-        escolhaDaArma = Random.Range(0, tiposDeArma.Count); // COMEÇA NO 1 PRA NÃO TIRAR O SOCO
+        escolhaDaArma = Random.Range(0, tiposDeArma.Count); // COMEï¿½A NO 1 PRA Nï¿½O TIRAR O SOCO
         tiposDeArma[escolhaDaArma].gameObject.SetActive(true);
     }
     public void TrocandoArma()

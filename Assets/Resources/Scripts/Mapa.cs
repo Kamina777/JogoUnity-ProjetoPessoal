@@ -14,7 +14,7 @@ public class Mapa : MonoBehaviour
     [SerializeField] private Transform enemySpawn;
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private int escolhaDoPlayer = 0;
-    [SerializeField] private GameObject Jogador;
+
 
     void Start()
     {
@@ -45,18 +45,13 @@ public class Mapa : MonoBehaviour
         }
     }
 
-    public void EnemySpawn()
+    public void SpawnDeLutadores()
     {
-        if(enemyPrefab != null)
-        {
-            int randomPrefab = Random.Range(0, enemyPrefab.Count - 1); // fazer um if pra n�o ter arma repetida
-            Instantiate(enemyPrefab[randomPrefab], enemySpawn); //PEGAR O TRANSFORM POSITION DO SPAWN
-        }
-    }
-    public void PlayerSpawn()
-    {
-        Instantiate(playerPrefab[escolhaDoPlayer], playerSpawn);
-        playerParent = GameObject.FindGameObjectWithTag("Player");
+        int randomPrefab = Random.Range(0, enemyPrefab.Count - 1); // fazer um if pra n�o ter arma repetida
+        var inimigo = Instantiate(enemyPrefab[randomPrefab], enemySpawn);
+        var jogador = Instantiate(playerPrefab[escolhaDoPlayer], playerSpawn);
+        inimigo.GetComponent<Lutador>().setAlvo(jogador.GetComponent<Lutador>().retornaReferencia());
+        jogador.GetComponent<Lutador>().setAlvo(inimigo.GetComponent<Lutador>().retornaReferencia());
 
     }
 }
